@@ -5,6 +5,8 @@
 #include "Arvore.h"
 #include "Aluno.h"
 
+
+
 struct arvore
 {
     long reg;
@@ -31,45 +33,44 @@ int deletarArvore(Arvore* arv)
 	return -1;
 }
 
-int inserirAluno_rec(No* raiz, long matricula, char* nome, char* email, long telefone)
+No* inserirAluno_rec(No* raiz, long matricula, char* nome, char* email, long telefone)
 {
-	if (raiz != NULL) 
-	{
-		inserirAluno_rec(raiz->esquerda, matricula, nome, email, telefone);
-		inserirAluno_rec(raiz->direita, matricula, nome, email, telefone);
+	if (raiz != NULL) {		
+		if (matricula < getMatricula(raiz->aluno)) {
+			raiz->esquerda = inserirAluno_rec(raiz->esquerda, matricula, nome, email, telefone);
+		}
+		else {
+			raiz->direita = inserirAluno_rec(raiz->direita, matricula, nome, email, telefone);
+		}
 	}
-	else
-	{
-		
-		raiz = (No*)malloc(sizeof(No));		
-		raiz->aluno = criarAluno(nome, matricula, email, telefone);		
+	else {
+		raiz = (No*)malloc(sizeof(No));
+		raiz->aluno = criarAluno(nome, matricula, email, telefone);
 		raiz->esquerda = NULL;
 		raiz->direita = NULL;
-		return 1;
-	}	
+		return raiz;
+	}
 
-	return -1;
+	return raiz;
 }
 
-int inserirAluno(Arvore* arv, char* nome, char* email, long telefone)
+void inserirAluno(Arvore* arv, char* nome, char* email, long telefone)
 {
-	return inserirAluno_rec(arv->raiz, arv->reg++, nome, email, telefone);
+	arv->raiz = inserirAluno_rec(arv->raiz, arv->reg++, nome, email, telefone);
 }
 
 void imprimir_rec(No* raiz)
-{
+{	
 	if (raiz != NULL)
 	{		
-		imprimir_rec(raiz->esquerda);
-		std::cout << "Matricula: " << raiz->aluno->matricula;
+		std::cout << "Matricula: " << getMatricula(raiz->aluno) << "\n";
+		imprimir_rec(raiz->esquerda);		
 		imprimir_rec(raiz->direita);
 	}
-
-	std::cout << "Out Print";
 }
 
 void imprimir(Arvore* arv)
-{	
+{		
 	imprimir_rec(arv->raiz);
 }
 

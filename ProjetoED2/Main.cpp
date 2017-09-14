@@ -8,8 +8,9 @@
 int main()
 {
     Arvore* arvore = criarArvore();
-	inserirAluno(arvore, "fel", "fel", 141);
-
+	for (int a = 0; a < 100; a++) {
+		inserirAluno(arvore, "fel", "fel", 32526079);		
+	}
 	imprimir(arvore);
     
     std::cout << "\n\n";
