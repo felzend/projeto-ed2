@@ -27,6 +27,19 @@
     <ClCompile Include="Arvore.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="db\BDAlunos10e1v1.txt" />
+    <Text Include="db\BDAlunos10e2v1.txt" />
+    <Text Include="db\BDAlunos10e3v1.txt" />
+    <Text Include="db\BDAlunos10e4v1.txt" />
+    <Text Include="db\BDAlunos10e5v1.txt" />
+    <Text Include="db\BDAlunos10e6v1.txt" />
+    <Text Include="db\PesqAlunos10e1.txt" />
+    <Text Include="db\PesqAlunos10e2.txt" />
+    <Text Include="db\PesqAlunos10e3.txt" />
+    <Text Include="db\PesqAlunos10e4.txt" />
+    <Text Include="db\PesqAlunos10e5.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CEC2D897-17EB-4153-B509-5137F09073A1}</ProjectGuid>
     <RootNamespace>ProjetoED2</RootNamespace>
@@ -36,7 +49,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -49,7 +62,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -90,6 +103,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

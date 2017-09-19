@@ -33,4 +33,17 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="db\BDAlunos10e1v1.txt" />
+    <Text Include="db\BDAlunos10e2v1.txt" />
+    <Text Include="db\BDAlunos10e3v1.txt" />
+    <Text Include="db\BDAlunos10e4v1.txt" />
+    <Text Include="db\BDAlunos10e5v1.txt" />
+    <Text Include="db\BDAlunos10e6v1.txt" />
+    <Text Include="db\PesqAlunos10e1.txt" />
+    <Text Include="db\PesqAlunos10e2.txt" />
+    <Text Include="db\PesqAlunos10e3.txt" />
+    <Text Include="db\PesqAlunos10e4.txt" />
+    <Text Include="db\PesqAlunos10e5.txt" />
+  </ItemGroup>
 </Project>

@@ -5,8 +5,6 @@
 #include "Arvore.h"
 #include "Aluno.h"
 
-
-
 struct arvore
 {
     long reg;
@@ -33,7 +31,7 @@ int deletarArvore(Arvore* arv)
 	return -1;
 }
 
-No* inserirAluno_rec(No* raiz, long matricula, char* nome, char* email, long telefone)
+No* inserirAluno_rec(No* raiz, long matricula, char* nome, char* email, char* telefone)
 {
 	if (raiz != NULL) {		
 		if (matricula < getMatricula(raiz->aluno)) {
@@ -54,7 +52,7 @@ No* inserirAluno_rec(No* raiz, long matricula, char* nome, char* email, long tel
 	return raiz;
 }
 
-void inserirAluno(Arvore* arv, char* nome, char* email, long telefone)
+void inserirAluno(Arvore* arv, char* nome, char* email, char* telefone)
 {
 	arv->raiz = inserirAluno_rec(arv->raiz, arv->reg++, nome, email, telefone);
 }
@@ -76,5 +74,23 @@ void imprimir(Arvore* arv)
 
 int removerAluno(Arvore* arv, long matricula)
 {
+	return -1;
+}
+
+long getMaiorMatricula_rec(No* raiz, long maior)
+{
+	if (raiz != NULL) {
+		long matricula = getMatricula(raiz->aluno);
+		std::cout << "Print: " << matricula << " vs maior " << maior << "\n";
+		maior = matricula;
+		getMaiorMatricula_rec(raiz->esquerda, maior);
+		getMaiorMatricula_rec(raiz->direita, maior);
+	}
+	return maior;
+}
+
+long getMaiorMatricula(Arvore* a)
+{
+	if (a != NULL) return getMaiorMatricula_rec(a->raiz, 0);
 	return -1;
 }
