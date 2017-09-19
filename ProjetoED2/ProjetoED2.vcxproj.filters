@@ -39,7 +39,6 @@
     <Text Include="db\BDAlunos10e3v1.txt" />
     <Text Include="db\BDAlunos10e4v1.txt" />
     <Text Include="db\BDAlunos10e5v1.txt" />
-    <Text Include="db\BDAlunos10e6v1.txt" />
     <Text Include="db\PesqAlunos10e1.txt" />
     <Text Include="db\PesqAlunos10e2.txt" />
     <Text Include="db\PesqAlunos10e3.txt" />
