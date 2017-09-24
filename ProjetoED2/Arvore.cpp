@@ -81,16 +81,18 @@ long getMaiorMatricula_rec(No* raiz, long maior)
 {
 	if (raiz != NULL) {
 		long matricula = getMatricula(raiz->aluno);
-		std::cout << "Print: " << matricula << " vs maior " << maior << "\n";
-		maior = matricula;
-		getMaiorMatricula_rec(raiz->esquerda, maior);
-		getMaiorMatricula_rec(raiz->direita, maior);
+		if (matricula < maior) {
+			return getMaiorMatricula_rec(raiz->esquerda, maior);
+		}
+		else {
+			return getMaiorMatricula_rec(raiz->direita, matricula);
+		}
 	}
 	return maior;
 }
 
 long getMaiorMatricula(Arvore* a)
 {
-	if (a != NULL) return getMaiorMatricula_rec(a->raiz, 0);
+	if (a != NULL) return getMaiorMatricula_rec(a->raiz, -1);
 	return -1;
 }
