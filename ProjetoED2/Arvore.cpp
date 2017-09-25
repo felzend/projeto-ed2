@@ -1,6 +1,9 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <iostream>
+#include <time.h>
 
 #include "Arvore.h"
 #include "Aluno.h"
@@ -57,19 +60,72 @@ void inserirAluno(Arvore* arv, char* nome, char* email, char* telefone)
 	arv->raiz = inserirAluno_rec(arv->raiz, arv->reg++, nome, email, telefone);
 }
 
+void inserirAluno2(Arvore* arv, long matricula, char* nome, char* email, char* telefone)
+{
+	arv->raiz = inserirAluno_rec(arv->raiz, matricula, nome, email, telefone);
+}
+
+No* buscarAluno_rec(No* raiz, long matricula) 
+{
+	if (raiz != NULL)
+	{
+		if (matricula < getMatricula(raiz->aluno)) {
+			return buscarAluno_rec(raiz->esquerda, matricula);
+		}
+		else if( matricula > getMatricula(raiz->aluno)) {
+			return buscarAluno_rec(raiz->direita, matricula);
+		}
+		else {			
+			return raiz;
+		}
+	}
+
+	return NULL;
+}
+
+No* buscarAluno(Arvore* arv, long matricula)
+{
+	return buscarAluno_rec(arv->raiz, matricula);
+}
+
 void imprimir_rec(No* raiz)
 {	
 	if (raiz != NULL)
-	{		
-		std::cout << "Matricula: " << getMatricula(raiz->aluno) << "\n";
+	{			
+		printInfo(raiz->aluno);
 		imprimir_rec(raiz->esquerda);		
 		imprimir_rec(raiz->direita);
 	}
 }
 
+long imprimir_ordenado_rec(No* raiz)
+{
+	if (raiz != NULL)
+	{
+		No* esq = raiz->esquerda;
+		No* dir = raiz->direita;
+		long mEsq = getMatricula(esq->aluno);
+		long mDir = getMatricula(dir->aluno);
+		return (mEsq < mDir) ? mEsq : mDir;
+		//printf("Matr: %d\n", getMatricula(raiz->aluno));
+	}
+
+	return -1;
+}
+
 void imprimir(Arvore* arv)
 {		
 	imprimir_rec(arv->raiz);
+	//std::cout << imprimir_ordenado_rec(arv->raiz) << "\n";
+}
+
+void printAlunoInfo(No* no)
+{
+	if (no != NULL) {
+		if (no->aluno != NULL) {
+			printInfo(no->aluno);
+		}
+	}
 }
 
 int removerAluno(Arvore* arv, long matricula)
@@ -95,4 +151,36 @@ long getMaiorMatricula(Arvore* a)
 {
 	if (a != NULL) return getMaiorMatricula_rec(a->raiz, -1);
 	return -1;
+}
+
+int atualizarAluno(No* no, char* nome, char* email, char* telefone)
+{
+	return atualizar(&no->aluno, nome, email, telefone);
+}
+
+void salvar_rec(No* raiz, char* directory)
+{
+	if (raiz != NULL)
+	{
+		char* info = getAlunoInfo(raiz->aluno);		
+		if (info != NULL) {
+			FILE *f = fopen(directory, "a");
+			fprintf(f, info);
+			fclose(f);
+		}
+		salvar_rec(raiz->esquerda, directory);
+		salvar_rec(raiz->direita, directory);
+	}	
+}
+
+int salvar(Arvore* arvore)
+{
+	char filename[100];
+	char directory[100];
+	char line[200];
+	int timestamp = (int)time(NULL);
+	sprintf_s(filename, "database-%d.txt", timestamp);
+	sprintf_s(directory, "./db/%s", filename);	
+	salvar_rec(arvore->raiz, directory);	
+	return 1;
 }
